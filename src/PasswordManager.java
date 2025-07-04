@@ -5,7 +5,7 @@ public class PasswordManager
 {
         private static final String filePath = "resources/passwords.dat";
 
-        public static ArrayList<String> loadPasswords()
+        public static ArrayList<PasswordEntry> loadPasswords()
         {
             try
             {
@@ -25,7 +25,7 @@ public class PasswordManager
 
                 FileInputStream fileInputStream = new FileInputStream(filePath);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                ArrayList<String> passwords = (ArrayList<String>) objectInputStream.readObject();
+                ArrayList<PasswordEntry> passwords = (ArrayList<PasswordEntry>) objectInputStream.readObject();
                 return passwords;
             }
             catch (FileNotFoundException e)
@@ -44,7 +44,7 @@ public class PasswordManager
             return new ArrayList<>();
         }
 
-        public static void savePasswords(ArrayList<String> passwords)
+        public static void savePasswords(ArrayList<PasswordEntry> passwords)
         {
             try
             {

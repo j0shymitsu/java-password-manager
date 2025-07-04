@@ -6,7 +6,7 @@ public class Main
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> savedPasswords = PasswordManager.loadPasswords();
+        ArrayList<PasswordEntry> savedPasswords = PasswordManager.loadPasswords();
 
         while (true)
         {
@@ -38,10 +38,13 @@ public class Main
                     break;
 
                 case "3":
-                    System.out.println("Enter a password to save: ");
+                    System.out.println("Enter name (e.g 'UoC Login', 'Facebook'): ");
+                    String name = scanner.nextLine();
 
-                    String savedPassword = scanner.nextLine();
-                    savedPasswords.add(savedPassword);
+                    System.out.println("Enter related password: ");
+                    String password = scanner.nextLine();
+
+                    savedPasswords.add(new PasswordEntry(name, password));
                     PasswordManager.savePasswords(savedPasswords);
 
                     System.out.println("Password saved.");
@@ -55,9 +58,9 @@ public class Main
                     else
                     {
                         System.out.println("Saved passwords: ");
-                        for (String password : savedPasswords)
+                        for (PasswordEntry entry : savedPasswords)
                         {
-                            System.out.println("- " + password);
+                            System.out.println("~ " + entry.getName() + ": " + entry.getPassword());
                         }
                     }
                     break;
